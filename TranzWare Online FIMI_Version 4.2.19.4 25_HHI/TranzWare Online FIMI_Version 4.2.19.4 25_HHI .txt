@@ -1,5 +1,5 @@
-Host Header Injection
----------------------
+Host Header Injection (CVE-2021-43106)
+---------------------------------------
 
 Type: Unauthenticated Remote attack
 
